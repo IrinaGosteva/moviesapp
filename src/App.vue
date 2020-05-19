@@ -8,7 +8,7 @@
       :total="moviesLength"
       @pageChanged="onPageChanged"
     />
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -35,16 +35,25 @@ export default {
       "moviesLength"
     ])
   },
+  watch: {
+    '$route.query': {
+      handler: "onPageQueryChange",
+      immediate: true,
+      deep: true
+    }
+  },
   methods: {
     ...mapActions("movies", ["changeCurrentPage"]),
+    onPageQueryChange({ page = 1 }) {
+      this.changeCurrentPage(Number(page));
+    },
     onChangePoster(poster) {
       this.posterBg = poster;
     },
     onPageChanged(page) {
-      // console.log(this.$route);
-      this.changeCurrentPage(page);
+      this.$router.push({ query: { page } });
     }
-  }
+  },
 };
 </script>
 

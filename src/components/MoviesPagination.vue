@@ -1,7 +1,7 @@
 <template>
   <div class="movies-pagination d-flex justify-content-center">
     <BPagination
-      v-model="currentPage"
+      v-model="currentPageModel"
       :per-page="perPage"
       :total-rows="total"
       prev-text="Prev"
